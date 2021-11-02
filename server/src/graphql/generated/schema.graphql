@@ -1,0 +1,59 @@
+type Query {
+  users: [User]
+}
+
+"""A User"""
+type User {
+  """id of user"""
+  id: ID!
+
+  """email of user"""
+  email: String
+
+  """name of user"""
+  username: String
+
+  """users password"""
+  password: String
+
+  """jwt token"""
+  token: String
+}
+
+type Mutation {
+  createUser(
+    """User input to be created"""
+    input: CreateUserInput!
+  ): User
+  loginUser(
+    """Login user"""
+    input: LoginUserInput!
+  ): User
+}
+
+"""Create user input"""
+input CreateUserInput {
+  """users name"""
+  username: String!
+
+  """users email"""
+  email: String!
+
+  """hashed password"""
+  password: String!
+
+  """jwt token"""
+  token: String!
+}
+
+"""Login user input"""
+input LoginUserInput {
+  """username"""
+  username: String!
+
+  """hashed password"""
+  password: String!
+
+  """jwt token"""
+  token: String!
+}
