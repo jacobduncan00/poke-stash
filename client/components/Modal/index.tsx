@@ -1,14 +1,22 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import Link from "next/link";
 
 type Props = {
   open: boolean;
   message: string;
   messageTitle: string;
+  buttonMessage: string;
   setIsOpen: (arg0: boolean) => void;
 };
 
-function Modal({ open, message, messageTitle, setIsOpen }: Props) {
+function Modal({
+  open,
+  message,
+  messageTitle,
+  buttonMessage,
+  setIsOpen,
+}: Props) {
   console.log(open);
 
   return (
@@ -59,13 +67,24 @@ function Modal({ open, message, messageTitle, setIsOpen }: Props) {
               </div>
 
               <div className="mt-4">
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-secondary bg-primary border border-transparent rounded-md hover:bg-primaryOffset focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close
-                </button>
+                {buttonMessage === "Close" ? (
+                  <button
+                    type="button"
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-secondary bg-primary border border-transparent rounded-md hover:bg-primaryOffset focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {buttonMessage}
+                  </button>
+                ) : (
+                  <Link href="/dashboard">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-secondary bg-primary border border-transparent rounded-md hover:bg-primaryOffset focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    >
+                      {buttonMessage}
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </Transition.Child>

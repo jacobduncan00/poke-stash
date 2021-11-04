@@ -21,6 +21,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [buttonMessage, setButtonMessage] = useState("");
   const [open, setOpen] = useState(false);
 
   const { signIn } = useAuth();
@@ -39,19 +40,27 @@ const SignUp = () => {
         "The email you entered is not a valid email address, try again."
       );
       setOpen(true);
+      setButtonMessage("Close");
+      return;
+    } else {
+      console.log("HERE");
+      createUser({
+        variables: {
+          input: {
+            username: username,
+            email: email,
+            password: password,
+            token: "",
+          },
+        },
+      });
+      setOpen(true);
+      setMessageTitle("Account Created");
+      setMessage("Signup successful, click below to go to your dashboard");
+      setButtonMessage("Dashboard");
       return;
     }
 
-    createUser({
-      variables: {
-        input: {
-          username: username,
-          email: email,
-          password: password,
-          token: "",
-        },
-      },
-    });
     //signIn({ username, password });
     setUsername("");
     setEmail("");
@@ -130,6 +139,7 @@ const SignUp = () => {
           open={open}
           message={message}
           messageTitle={messageTitle}
+          buttonMessage={buttonMessage}
           setIsOpen={setIsOpen}
         />
       </div>
