@@ -1,5 +1,6 @@
-import { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { useAuth } from "../../lib/auth";
+import Link from "next/link";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
@@ -48,17 +49,16 @@ const SignIn = () => {
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-primary hover:bg-blue-dark text-secondary font-bold py-2 px-4 rounded"
+                className="bg-primary hover:bg-primaryOffset text-secondary font-bold py-2 px-4 rounded"
                 type="submit"
               >
                 Sign In
               </button>
-              <a
-                className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
-                href="/forgot"
-              >
-                Forgot Password?
-              </a>
+              <Link href="/forgot">
+                <div className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker">
+                  Forgot Password?
+                </div>
+              </Link>
             </div>
           </div>
         </form>

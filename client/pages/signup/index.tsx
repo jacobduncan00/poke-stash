@@ -1,6 +1,8 @@
 import { SyntheticEvent, useState } from "react";
 import { useAuth } from "../../lib/auth";
 import { gql, useMutation } from "@apollo/client";
+import * as EmailValidator from "email-validator";
+import Modal from "../../components/Modal";
 
 const SIGN_UP = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
@@ -17,12 +19,29 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageTitle, setMessageTitle] = useState("");
+  const [open, setOpen] = useState(false);
 
   const { signIn } = useAuth();
   const [createUser, { data, loading, error }] = useMutation(SIGN_UP);
 
+  const setIsOpen = (openState: boolean) => {
+    setOpen(openState);
+  };
+
   function onSubmit(e: SyntheticEvent) {
     e.preventDefault();
+
+    if (EmailValidator.validate(email) === false) {
+      setMessageTitle("Invalid Credentials");
+      setMessage(
+        "The email you entered is not a valid email address, try again."
+      );
+      setOpen(true);
+      return;
+    }
+
     createUser({
       variables: {
         input: {
@@ -37,11 +56,19 @@ const SignUp = () => {
     setUsername("");
     setEmail("");
     setPassword("");
+    setMessage("");
+    setOpen(false);
   }
 
   return (
     <div>
-      <div className="bg-primary h-screen flex items-center justify-center w-full">
+      <div
+        className={
+          open
+            ? "filter blur-sm bg-primaryOffset h-screen flex items-center justify-center w-full"
+            : "bg-primary h-screen flex items-center justify-center w-full"
+        }
+      >
         <form
           onSubmit={onSubmit}
           className="w-2/3 sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 2xl:w-1/3"
@@ -52,7 +79,8 @@ const SignUp = () => {
                 Username
               </label>
               <input
-                className="shadow appearance-none border-2 border-secondary hover:border-primary rounded w-full py-2 px-3 text-grey-darker outline-none"
+                className="shadow appearance-none border-2 border-secondary focus:border-primary valid:border-primary rounded w-full py-2 px-3 text-grey-darker outline-none"
+                required
                 id="username"
                 type="text"
                 placeholder="Username"
@@ -65,7 +93,8 @@ const SignUp = () => {
                 Email
               </label>
               <input
-                className="shadow appearance-none border-2 border-secondary hover:border-primary rounded w-full py-2 px-3 text-grey-darker outline-none"
+                className="shadow appearance-none border-2 border-secondary focus:border-primary rounded w-full py-2 px-3 text-grey-darker outline-none"
+                required
                 id="email"
                 type="text"
                 placeholder="Email"
@@ -78,7 +107,8 @@ const SignUp = () => {
                 Password
               </label>
               <input
-                className="shadow appearance-none border-2 border-secondary hover:border-primary rounded w-full py-2 px-3 text-grey-darker mb-3 outline-none"
+                className="shadow appearance-none border-2 border-secondary focus:border-primary rounded w-full py-2 px-3 text-grey-darker mb-3 outline-none"
+                required
                 id="password"
                 type="password"
                 placeholder="******************"
@@ -88,7 +118,7 @@ const SignUp = () => {
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-primary hover:bg-blue-dark text-secondary font-bold py-2 px-4 rounded"
+                className="bg-primary hover:bg-primaryOffset hover:bg-blue-dark text-secondary font-bold py-2 px-4 rounded"
                 type="submit"
               >
                 Sign Up
@@ -96,6 +126,12 @@ const SignUp = () => {
             </div>
           </div>
         </form>
+        <Modal
+          open={open}
+          message={message}
+          messageTitle={messageTitle}
+          setIsOpen={setIsOpen}
+        />
       </div>
     </div>
   );

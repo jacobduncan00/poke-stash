@@ -1,5 +1,6 @@
 import Pika from "../../public/pika.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   loggedIn: boolean;
@@ -30,32 +31,28 @@ const Navbar = ({ loggedIn }: Props) => {
           </div>
           <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div className="text-sm lg:flex-grow">
-              <a
-                href="#responsive-header"
-                className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                English Sets
-              </a>
-              <a
-                href="#responsive-header"
-                className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Japanese Sets
-              </a>
-              <a
-                href="#responsive-header"
-                className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-              >
-                News
-              </a>
+              <Link href="#responsive-header">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  English Sets
+                </div>
+              </Link>
+              <Link href="#responsive-header">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  Japanese Sets
+                </div>
+              </Link>
+              <Link href="#responsive-header">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  News
+                </div>
+              </Link>
             </div>
             <div>
-              <a
-                href="/dashboard"
-                className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-primary hover:bg-white mt-4 lg:mt-0"
-              >
-                Dashboard
-              </a>
+              <Link href="/dashboard">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  Dashboard
+                </div>
+              </Link>
             </div>
           </div>
         </nav>
@@ -81,31 +78,37 @@ const Navbar = ({ loggedIn }: Props) => {
           </div>
           <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div className="text-sm lg:flex-grow">
-              <a
-                href="sets/english"
-                className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                English Sets
-              </a>
-              <a
-                href="sets/japanese"
-                className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-              >
-                Japanese Sets
-              </a>
-              <a
-                href="news"
-                className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
-              >
-                News
-              </a>
+              <Link href="sets/english">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  English Sets
+                </div>
+              </Link>
+              <Link href="sets/english">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  Japanese Sets
+                </div>
+              </Link>
+              <Link href="sets/english">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                  News
+                </div>
+              </Link>
             </div>
-            <a
-              href="/signup"
-              className="float-right inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-primary hover:bg-white mt-4 lg:mt-0"
-            >
-              Sign Up
-            </a>
+            <Link href="/signup">
+              <div className="float-right inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-primary hover:bg-white mt-4 lg:mt-0">
+                Sign Up
+              </div>
+            </Link>
+            <Link href="/signin">
+              <div
+                className="ml-2 float-right inline-block text-sm px-4 py-2
+                leading-none border rounded text-white border-white
+                hover:border-transparent hover:text-primary hover:bg-white mt-4
+                lg:mt-0"
+              >
+                Sign In
+              </div>
+            </Link>
           </div>
         </nav>
       )}
