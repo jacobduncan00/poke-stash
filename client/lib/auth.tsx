@@ -24,14 +24,14 @@ const AuthContext = createContext<AuthProps>(contextDefaults);
 type AuthProps = {
   setAuthToken?: Dispatch<SetStateAction<null>>;
   isSignedIn?: () => boolean;
-  signIn: ({ username, password }: CredentialsProp) => Promise<void>;
+  signIn: ({ username, password }: CredentialsProp) => Promise<string>;
   signOut: () => void;
 };
 
 type SignInFunction = ({
   username,
   password,
-}: CredentialsProp) => Promise<void>;
+}: CredentialsProp) => Promise<string>;
 
 type SignOutFunction = () => void;
 
@@ -105,22 +105,31 @@ function useProvideAuth() {
       }
     `;
 
-    const result = await client.mutate({
-      mutation: LoginMutation,
-      variables: {
-        input: {
-          username: username,
-          password: password,
-          token: "",
+    let returnVal = "";
+    const result = await client
+      .mutate({
+        mutation: LoginMutation,
+        variables: {
+          input: {
+            username: username,
+            password: password,
+            token: "",
+          },
         },
-      },
-    });
+      })
+      .catch((err) => {
+        const msg = err.message;
+        if (msg === "No User Found" || msg === "Wrong Password") {
+          returnVal = msg;
+        }
+      });
 
-    console.log(result);
-
-    if (result?.data?.login?.token) {
-      setAuthToken(result.data.login.token);
+    if (result?.data?.loginUser?.token) {
+      setAuthToken(result.data.loginUser.token);
+      returnVal = result.data.loginUser.token;
     }
+
+    return returnVal;
   };
 
   const signOut: SignOutFunction = () => {

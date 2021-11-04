@@ -95,16 +95,16 @@ const Navbar = ({ loggedIn }: Props) => {
               </Link>
             </div>
             <Link href="/signup">
-              <div className="float-right inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-primary hover:bg-white mt-4 lg:mt-0">
+              <div className="cursor-pointer float-right inline-block text-sm px-4 py-2 leading-none border rounded text-secondary border-secondary hover:border-transparent hover:text-primary hover:bg-secondary mt-4 lg:mt-0">
                 Sign Up
               </div>
             </Link>
             <Link href="/signin">
               <div
                 className="ml-2 float-right inline-block text-sm px-4 py-2
-                leading-none border rounded text-white border-white
-                hover:border-transparent hover:text-primary hover:bg-white mt-4
-                lg:mt-0"
+                leading-none border rounded text-secondary border-secondary
+                hover:border-transparent hover:text-primary hover:bg-secondary mt-4
+                lg:mt-0 cursor-pointer"
               >
                 Sign In
               </div>

@@ -1,21 +1,46 @@
 import React, { SyntheticEvent, useState } from "react";
 import { useAuth } from "../../lib/auth";
 import Link from "next/link";
+import Router from "next/router";
+import Modal from "../../components/Modal";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn } = useAuth();
+  const [messageTitle, setMessageTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [buttonMessage, setButtonMessage] = useState("");
+  const [open, setOpen] = useState(false);
 
-  function onSubmit(e: SyntheticEvent) {
+  const { signIn, isSignedIn } = useAuth();
+
+  const setIsOpen = (openState: boolean) => {
+    setOpen(openState);
+  };
+
+  async function onSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    signIn({ username, password });
+    const result = await signIn({ username, password });
+    if (result != "No User Found" && result != "Wrong Password") {
+      Router.push("/dashboard");
+    } else {
+      setOpen(true);
+      setMessageTitle("Invalid Credentials");
+      setMessage("Either your username of password is wrong. Try again");
+      setButtonMessage("Close");
+    }
   }
 
   return (
     <div>
-      <div className="bg-primary h-screen flex items-center justify-center w-full">
+      <div
+        className={
+          open
+            ? "filter blur-sm bg-primaryOffset h-screen flex items-center justify-center w-full"
+            : "bg-primary h-screen flex items-center justify-center w-full"
+        }
+      >
         <form
           onSubmit={onSubmit}
           className="w-2/3 sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 2xl:w-1/3"
@@ -62,6 +87,13 @@ const SignIn = () => {
             </div>
           </div>
         </form>
+        <Modal
+          open={open}
+          message={message}
+          messageTitle={messageTitle}
+          buttonMessage={buttonMessage}
+          setIsOpen={setIsOpen}
+        />
       </div>
     </div>
   );

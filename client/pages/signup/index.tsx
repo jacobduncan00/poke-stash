@@ -58,15 +58,12 @@ const SignUp = () => {
       setMessageTitle("Account Created");
       setMessage("Signup successful, click below to go to your dashboard");
       setButtonMessage("Dashboard");
+
+      // *** Need to do this in the modal ***
+      //signIn({ username, password });
+
       return;
     }
-
-    //signIn({ username, password });
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setMessage("");
-    setOpen(false);
   }
 
   return (
@@ -79,6 +76,7 @@ const SignUp = () => {
         }
       >
         <form
+          autoComplete="off"
           onSubmit={onSubmit}
           className="w-2/3 sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 2xl:w-1/3"
         >
