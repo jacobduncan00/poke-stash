@@ -16,6 +16,7 @@ const Dashboard = () => {
   const fetchPokemon = () => {
     setImg([]);
     // const s = set.toLowerCase();
+    // name:charizard
     const s = "swsh8";
     pokemon.card.all({ q: `set.id:${s}` }).then((result: Array<{}>) => {
       result.forEach((r: any) => {
