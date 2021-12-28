@@ -32,17 +32,17 @@ const Navbar = ({ loggedIn }: Props) => {
           <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div className="text-sm lg:flex-grow">
               <Link href="#responsive-header">
-                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer">
                   English Sets
                 </div>
               </Link>
               <Link href="#responsive-header">
-                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer">
                   Japanese Sets
                 </div>
               </Link>
               <Link href="#responsive-header">
-                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer">
                   News
                 </div>
               </Link>
@@ -79,17 +79,17 @@ const Navbar = ({ loggedIn }: Props) => {
           <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div className="text-sm lg:flex-grow">
               <Link href="sets/english">
-                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer">
                   English Sets
                 </div>
               </Link>
               <Link href="sets/english">
-                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer">
                   Japanese Sets
                 </div>
               </Link>
               <Link href="sets/english">
-                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                <div className="text-secondary block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer">
                   News
                 </div>
               </Link>

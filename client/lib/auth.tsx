@@ -15,8 +15,8 @@ import {
 } from "@apollo/client";
 
 const contextDefaults: AuthProps = {
-  signIn: ({ username, password }: CredentialsProp) => new Promise(() => {}),
-  signOut: () => {},
+  signIn: ({ username, password }: CredentialsProp) => new Promise(() => { }),
+  signOut: () => { },
 };
 
 const AuthContext = createContext<AuthProps>(contextDefaults);
@@ -80,7 +80,7 @@ function useProvideAuth() {
 
   const createApolloClient = () => {
     const link = new HttpLink({
-      uri: "http://localhost:4000",
+      uri: "http://localhost:5000",
       headers: getAuthHeaders(),
     });
 
